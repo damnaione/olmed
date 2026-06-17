@@ -1,0 +1,2220 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Олмед — Стоматология и косметология в Сестрорецке</title>
+  <meta name="description" content="Медицинский центр ОЛМЕД в Сестрорецке — стоматология для взрослых и детей, ортодонтия, протезирование, косметология. Работаем с 1991 года. Рейтинг 4,8 на Яндексе.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:               #F8F7F4;
+      --surface:          #FFFFFF;
+      --border:           #E4E3DE;
+      --text-primary:     #141420;
+      --text-secondary:   #58586A;
+      --text-muted:       #9898A8;
+      --blue:             #1B5E8A;
+      --blue-dark:        #0F3A5C;
+      --teal:             #3BADA0;
+      --teal-light:       #E6F5F3;
+      --blue-light:       #EBF2F8;
+      --serif:            'Playfair Display', Georgia, serif;
+      --sans:             'Inter', system-ui, sans-serif;
+      --r-sm:             8px;
+      --r-md:             16px;
+      --r-lg:             24px;
+      --shadow-sm:        0 1px 4px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md:        0 4px 20px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+      --shadow-lg:        0 16px 48px rgba(0,0,0,0.12);
+      --ease:             cubic-bezier(0.4,0,0.2,1);
+      --container:        min(1180px, 100% - 48px);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    h1, h2, h3 { font-family: var(--serif); line-height: 1.15; }
+
+    .container { width: var(--container); margin: 0 auto; }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 100px;
+      font-family: var(--sans); font-size: .9rem; font-weight: 500;
+      cursor: pointer; border: none; transition: all .25s var(--ease);
+      white-space: nowrap;
+    }
+    .btn-primary { background: var(--teal); color: #fff; }
+    .btn-primary:hover { background: #2F9A8E; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(59,173,160,.35); }
+
+    .btn-outline { background: transparent; color: var(--blue); border: 1.5px solid var(--blue); }
+    .btn-outline:hover { background: var(--blue); color: #fff; }
+
+    .btn-ghost { background: rgba(255,255,255,.12); color: #fff; border: 1.5px solid rgba(255,255,255,.35); backdrop-filter: blur(4px); }
+    .btn-ghost:hover { background: rgba(255,255,255,.22); }
+
+    /* ── Label chip ── */
+    .label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: .72rem; font-weight: 600; letter-spacing: .13em;
+      text-transform: uppercase; color: var(--teal); margin-bottom: 14px;
+    }
+    .label::before { content:''; width:22px; height:2px; background:var(--teal); border-radius:2px; }
+
+    /* ── Scroll animations ── */
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .65s var(--ease), transform .65s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal:nth-child(2) { transition-delay: .1s; }
+    .reveal:nth-child(3) { transition-delay: .2s; }
+    .reveal:nth-child(4) { transition-delay: .3s; }
+    .reveal:nth-child(5) { transition-delay: .4s; }
+
+    /* ═══════════════════════════════════
+       SCROLL PROGRESS
+    ═══════════════════════════════════ */
+    #progress {
+      position: fixed; top: 0; left: 0; height: 3px; width: 0;
+      background: linear-gradient(90deg, var(--blue), var(--teal));
+      z-index: 200; transition: width .1s linear;
+    }
+
+    /* ═══════════════════════════════════
+       HEADER
+    ═══════════════════════════════════ */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      transition: background .3s, box-shadow .3s;
+      --hdr-text:      #fff;
+      --hdr-text-soft: rgba(255,255,255,.82);
+      --hdr-burger:    #fff;
+    }
+    header.scrolled {
+      background: rgba(248,247,244,.96);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      --hdr-text:      var(--text-primary);
+      --hdr-text-soft: var(--text-secondary);
+      --hdr-burger:    var(--text-primary);
+    }
+    .hdr {
+      display: flex; align-items: center;
+      justify-content: space-between; height: 72px;
+    }
+
+    /* Logo */
+    .logo { display: flex; align-items: center; gap: 11px; }
+    .logo-mark {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--blue), var(--teal));
+      display: flex; align-items: center; justify-content: center;
+    }
+    .logo-mark svg { width: 21px; height: 21px; fill: #fff; }
+    .logo-name {
+      font-family: var(--serif); font-size: 1.45rem; font-weight: 700;
+      letter-spacing: -.02em; color: var(--hdr-text, var(--text-primary));
+      transition: color .3s;
+    }
+    .logo-name em { font-style: normal; color: var(--teal); }
+
+    nav { display: flex; gap: 30px; }
+    nav a { font-size: .85rem; font-weight: 500; color: var(--hdr-text-soft, var(--text-secondary)); transition: color .2s; }
+    nav a:hover { color: var(--blue); }
+
+    .hdr-right { display: flex; align-items: center; gap: 16px; }
+    .hdr-phone { font-size: .875rem; font-weight: 600; color: var(--hdr-text, var(--text-primary)); transition: color .3s; }
+
+    /* Burger */
+    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .burger span { display: block; width: 24px; height: 2px; background: var(--hdr-burger, var(--text-primary)); border-radius: 2px; transition: background .3s; }
+
+    /* Mobile nav */
+    .mob-nav {
+      display: none; position: fixed; inset: 72px 0 0;
+      background: var(--bg); padding: 28px 24px;
+      flex-direction: column; gap: 20px;
+      border-top: 1px solid var(--border); z-index: 99;
+    }
+    .mob-nav.open { display: flex; }
+    .mob-nav a { font-size: 1.2rem; font-weight: 500; padding: 8px 0; border-bottom: 1px solid var(--border); }
+
+    /* ═══════════════════════════════════
+       HERO
+    ═══════════════════════════════════ */
+    .hero {
+      min-height: 100vh; padding-top: 72px;
+      background: linear-gradient(155deg, #0A2540 0%, #1B5E8A 55%, #176659 100%);
+      display: flex; align-items: center; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content:''; position: absolute;
+      top: -120px; right: -120px;
+      width: 640px; height: 640px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,173,160,.18) 0%, transparent 65%);
+    }
+    .hero::after {
+      content:''; position: absolute;
+      bottom: -160px; left: -80px;
+      width: 520px; height: 520px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(27,94,138,.25) 0%, transparent 65%);
+    }
+
+    .hero-orbs { position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0; }
+    .orb { position:absolute; border-radius:50%; filter:blur(60px); }
+    .orb1 { width:380px; height:380px; background:var(--teal); opacity:.30; top:-60px; right:6%; animation:orbFloat1 19s ease-in-out infinite; }
+    .orb2 { width:300px; height:300px; background:#2DACED; opacity:.22; bottom:-40px; left:4%; animation:orbFloat2 23s ease-in-out infinite; }
+    .orb3 { width:230px; height:230px; background:#9D64C4; opacity:.18; top:38%; left:46%; animation:orbFloat3 27s ease-in-out infinite; }
+    @keyframes orbFloat1 { 0%,100%{transform:translate(0,0);} 50%{transform:translate(-34px,38px);} }
+    @keyframes orbFloat2 { 0%,100%{transform:translate(0,0);} 50%{transform:translate(38px,-28px);} }
+    @keyframes orbFloat3 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(-22px,-24px) scale(1.1);} }
+
+    @keyframes heroFadeUp { from{opacity:0; transform:translateY(18px);} to{opacity:1; transform:translateY(0);} }
+    .hero-pill { animation:heroFadeUp .7s var(--ease) both; }
+    .hero h1 { animation:heroFadeUp .7s var(--ease) .1s both; }
+    .hero-hook-wrap { animation:heroFadeUp .7s var(--ease) .2s both; }
+    .hero-sub { animation:heroFadeUp .7s var(--ease) .3s both; }
+    .hero-actions { animation:heroFadeUp .7s var(--ease) .4s both; }
+    .hero-stats { animation:heroFadeUp .7s var(--ease) .5s both; }
+    .hero-card { animation:heroFadeUp .8s var(--ease) .35s both; }
+    @media (prefers-reduced-motion: reduce) {
+      .orb, .hero-pill, .hero h1, .hero-hook-wrap, .hero-sub, .hero-actions, .hero-stats, .hero-card { animation:none !important; }
+    }
+
+    .hero-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 72px; align-items: center;
+      padding: 72px 0; position: relative; z-index: 1;
+    }
+
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18);
+      backdrop-filter: blur(8px); border-radius: 100px;
+      padding: 6px 16px 6px 8px; font-size: .78rem;
+      color: rgba(255,255,255,.88); margin-bottom: 24px;
+    }
+    .pulse {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--teal); animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity:1; transform:scale(1); }
+      50% { opacity:.4; transform:scale(.75); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 3.9rem);
+      color: #fff; letter-spacing: -.025em; margin-bottom: 22px;
+    }
+    .hero h1 em { font-style: italic; color: #7EE8DB; }
+
+    .hero-hook-wrap { min-height:46px; margin-bottom:30px; }
+    .hero-hook {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,.07); border: 1px solid rgba(126,232,219,.3);
+      backdrop-filter: blur(8px); border-radius: 100px;
+      padding: 11px 22px; font-size: .95rem; font-weight: 600;
+      color: #fff; transition: opacity .32s var(--ease), transform .32s var(--ease);
+    }
+    .hero-hook-ic { font-size: 1rem; flex-shrink:0; }
+
+    .hero-sub {
+      font-size: 1.05rem; color: rgba(255,255,255,.72);
+      line-height: 1.75; margin-bottom: 38px; max-width: 440px;
+    }
+
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 52px; }
+
+    .hero-stats { display: flex; gap: 36px; }
+    .stat-n { font-family: var(--serif); font-size: 2rem; font-weight: 700; color: #fff; line-height: 1; }
+    .stat-n sup { font-size: 1rem; color: var(--teal); }
+    .stat-l { font-size: .72rem; color: rgba(255,255,255,.5); margin-top: 3px; }
+
+    /* Hero card */
+    .hero-card {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(22px); border-radius: var(--r-lg);
+      padding: 36px; position: relative;
+      transition: transform .25s var(--ease);
+      will-change: transform;
+    }
+    @media (pointer:fine) {
+      .hero-card { transform-style: preserve-3d; }
+    }
+    .hc-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(59,173,160,.2); border: 1px solid rgba(59,173,160,.35);
+      border-radius: 100px; padding: 4px 12px;
+      font-size: .72rem; color: #7EE8DB; margin-bottom: 20px;
+    }
+    .hc-rating { display: flex; align-items: center; gap: 16px; margin-bottom: 4px; }
+    .hc-ring-wrap { position: relative; width: 76px; height: 76px; flex-shrink: 0; }
+    .hc-ring-wrap svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .hc-ring-bg { fill: none; stroke: rgba(255,255,255,.12); stroke-width: 6; }
+    .hc-ring-fg { fill: none; stroke: #7EE8DB; stroke-width: 6; stroke-linecap: round; transition: stroke-dashoffset 1.4s var(--ease); }
+    .hc-ring-num { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 1.3rem; font-weight: 700; color: #fff; }
+    .hc-rating-side { display:flex; flex-direction:column; gap:4px; }
+    .hc-stars { color: #FFD166; font-size: 1.05rem; letter-spacing: 1px; }
+    .hc-meta { font-size: .78rem; color: rgba(255,255,255,.45); }
+    .hc-div { height: 1px; background: rgba(255,255,255,.1); margin: 20px 0; }
+
+    .hc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .hc-chip {
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09);
+      border-radius: 10px; padding: 9px 11px;
+      font-size: .76rem; color: rgba(255,255,255,.82); line-height: 1.25;
+    }
+    .hc-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
+
+    .hc-rev-ticker { min-height: 70px; }
+    .hc-rev-stars { color: #FFD166; font-size: .8rem; letter-spacing: 1px; margin-bottom: 6px; }
+    .hc-rev-text { font-size: .85rem; color: rgba(255,255,255,.85); line-height: 1.5; margin-bottom: 6px; transition: opacity .3s, transform .3s; }
+    .hc-rev-name { font-size: .74rem; color: rgba(255,255,255,.45); transition: opacity .3s, transform .3s; }
+
+    .hc-addr { font-size: .78rem; color: rgba(255,255,255,.42); margin-top: 4px; }
+
+    /* ═══════════════════════════════════
+       SECTION BASE
+    ═══════════════════════════════════ */
+    .section { padding: 96px 0; }
+
+    /* ═══════════════════════════════════
+       ABOUT
+    ═══════════════════════════════════ */
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .about-vis { position: relative; }
+    .about-ph {
+      width: 100%; aspect-ratio: 4/5; border-radius: var(--r-lg);
+      background: linear-gradient(145deg, var(--blue-light), var(--teal-light));
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .about-ph::before {
+      content:''; position: absolute; inset:0;
+      background:
+        radial-gradient(circle at 30% 35%, rgba(27,94,138,.12) 0%, transparent 50%),
+        radial-gradient(circle at 72% 68%, rgba(59,173,160,.12) 0%, transparent 50%);
+    }
+    .ph-icon { font-size: 4.5rem; opacity: .25; }
+    .about-badge {
+      position: absolute; bottom: 22px; right: -22px;
+      background: #fff; border-radius: var(--r-md);
+      padding: 18px 22px; box-shadow: var(--shadow-lg); text-align: center;
+    }
+    .badge-n { font-family: var(--serif); font-size: 2.4rem; font-weight: 700; color: var(--blue); line-height: 1; }
+    .badge-l { font-size: .72rem; color: var(--text-muted); margin-top: 2px; }
+
+    .about-text h2 { font-size: clamp(2rem, 3.5vw, 2.8rem); margin-bottom: 18px; letter-spacing: -.02em; }
+    .about-text p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 14px; }
+
+    .feats {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px; margin-top: 28px;
+    }
+    .feat { display: flex; gap: 12px; align-items: flex-start; }
+    .feat-ic {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--teal-light); display: flex;
+      align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;
+    }
+    .feat strong { display:block; font-size:.875rem; font-weight:600; color:var(--text-primary); margin-bottom:1px; }
+    .feat span { font-size:.78rem; color:var(--text-muted); }
+
+    /* ═══════════════════════════════════
+       SERVICES
+    ═══════════════════════════════════ */
+    .services { background: var(--text-primary); padding: 96px 0; }
+    .srv-hdr { text-align: center; margin-bottom: 56px; }
+    .srv-hdr h2 { font-size: clamp(2rem,4vw,3rem); color:#fff; letter-spacing:-.02em; }
+    .srv-hdr .label { color:var(--teal); justify-content:center; }
+    .srv-hdr .label::before { background:var(--teal); }
+
+    .srv-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
+
+    .srv-card {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--r-lg); padding: 34px 28px;
+      transition: all .28s var(--ease); cursor: default;
+    }
+    .srv-card:hover {
+      background: rgba(255,255,255,.09);
+      border-color: rgba(59,173,160,.38);
+      transform: translateY(-5px);
+    }
+    .srv-ic {
+      width: 54px; height: 54px; border-radius: 13px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin-bottom: 22px;
+    }
+    .srv-card:nth-child(1) .srv-ic { background: rgba(27,94,138,.3); }
+    .srv-card:nth-child(2) .srv-ic { background: rgba(59,173,160,.25); }
+    .srv-card:nth-child(3) .srv-ic { background: rgba(157,100,180,.22); }
+
+    .srv-card h3 { font-size: 1.35rem; color:#fff; margin-bottom:10px; letter-spacing:-.01em; }
+    .srv-card > p { font-size:.86rem; color:rgba(255,255,255,.52); line-height:1.7; margin-bottom:22px; }
+
+    .srv-list { list-style:none; display:flex; flex-direction:column; gap:8px; margin-bottom:26px; }
+    .srv-list li {
+      font-size: .82rem; color: rgba(255,255,255,.7);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .srv-list li::before {
+      content:''; width:5px; height:5px; border-radius:50%;
+      background: var(--teal); flex-shrink:0;
+    }
+    .srv-link {
+      font-size:.8rem; font-weight:600; color:var(--teal);
+      display:flex; align-items:center; gap:6px; transition:gap .2s;
+    }
+    .srv-link:hover { gap:10px; }
+
+    /* ═══════════════════════════════════
+       DOCTORS
+    ═══════════════════════════════════ */
+    .doc-hdr { text-align:center; margin-bottom:52px; }
+    .doc-hdr h2 { font-size:clamp(2rem,4vw,3rem); letter-spacing:-.02em; }
+
+    .doc-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:22px; }
+
+    .doc-card {
+      background:var(--surface); border-radius:var(--r-lg);
+      overflow:hidden; box-shadow:var(--shadow-sm);
+      transition:all .28s var(--ease);
+    }
+    .doc-card:hover { transform:translateY(-5px); box-shadow:var(--shadow-lg); }
+
+    .doc-ph {
+      width:100%; aspect-ratio:3/4;
+      display:flex; align-items:center; justify-content:center;
+      position:relative; overflow:hidden;
+    }
+    /* Unique gradients per card */
+    .doc-card:nth-child(1) .doc-ph { background:linear-gradient(155deg,#1B5E8A,#2DACED); }
+    .doc-card:nth-child(2) .doc-ph { background:linear-gradient(155deg,#1E7F72,#3BADA0); }
+    .doc-card:nth-child(3) .doc-ph { background:linear-gradient(155deg,#5B4E9B,#9D64C4); }
+    .doc-card:nth-child(4) .doc-ph { background:linear-gradient(155deg,#8A3D1B,#CB6D45); }
+    .doc-card:nth-child(5) .doc-ph { background:linear-gradient(155deg,#2D6A3A,#4CAF73); }
+    .doc-card:nth-child(6) .doc-ph { background:linear-gradient(155deg,#1A3A6B,#2D72C8); }
+    .doc-card:nth-child(7) .doc-ph { background:linear-gradient(155deg,#8A2D6B,#C45B9B); }
+    .doc-card:nth-child(8) .doc-ph { background:linear-gradient(155deg,#5A6B1A,#98C83B); }
+
+    .doc-ph::before {
+      content:''; position:absolute; bottom:-28%; left:-8%; width:116%; height:65%;
+      background:rgba(255,255,255,.09); border-radius:50%;
+    }
+    .doc-avatar { width:30%; max-width:74px; z-index:1; opacity:.9; }
+    .doc-avatar circle, .doc-avatar path { fill:rgba(255,255,255,.62); }
+
+    .doc-info { padding:18px 20px; }
+    .doc-name { font-family:var(--serif); font-size:.96rem; font-weight:600; color:var(--text-primary); margin-bottom:3px; }
+    .doc-role { font-size:.75rem; color:var(--teal); font-weight:500; }
+
+    .doc-note { text-align:center; margin-top:36px; font-size:.85rem; color:var(--text-muted); }
+
+    /* ═══════════════════════════════════
+       PRICES
+    ═══════════════════════════════════ */
+    .prices { background:var(--blue-light); padding:96px 0; }
+    .pr-hdr { text-align:center; margin-bottom:52px; }
+    .pr-hdr h2 { font-size:clamp(2rem,4vw,3rem); letter-spacing:-.02em; }
+
+    .pr-tabs {
+      display:flex; flex-wrap:wrap; justify-content:center;
+      gap:10px; margin-bottom:28px;
+    }
+    .pr-tab {
+      display:inline-flex; align-items:center; gap:8px;
+      background:#fff; border:1.5px solid var(--border); border-radius:100px;
+      padding:11px 20px; font-family:var(--sans); font-size:.84rem; font-weight:600;
+      color:var(--text-secondary); cursor:pointer; transition:all .25s var(--ease);
+      white-space:nowrap;
+    }
+    .pr-tab:hover { border-color:var(--teal); color:var(--text-primary); }
+    .pr-tab.active {
+      background:linear-gradient(135deg,var(--blue),var(--teal));
+      border-color:transparent; color:#fff;
+      box-shadow:0 8px 20px rgba(27,94,138,.25);
+    }
+    .pr-tab-ic { font-size:1rem; }
+    .pr-tab-count {
+      background:rgba(0,0,0,.06); border-radius:100px; padding:1px 8px;
+      font-size:.72rem; font-weight:700; color:var(--text-muted);
+      transition:all .25s var(--ease);
+    }
+    .pr-tab.active .pr-tab-count {
+      background:rgba(255,255,255,.25); color:#fff;
+      animation:prCountPop .35s var(--ease);
+    }
+    @keyframes prCountPop {
+      from { transform:scale(.6); opacity:0; }
+      to   { transform:scale(1); opacity:1; }
+    }
+
+    .pr-panels {
+      background:#fff; border-radius:var(--r-lg); box-shadow:var(--shadow-sm);
+      max-width:760px; margin:0 auto; padding:6px 28px;
+    }
+    .pr-panel { display:none; padding:16px 0; }
+    .pr-panel.active { display:block; }
+    .pr-panel.entering { animation:prPanelIn .32s var(--ease); }
+    @keyframes prPanelIn {
+      from { opacity:0; transform:translateY(10px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    .pr-row {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:9px 0; border-bottom:1px solid var(--border); gap:14px;
+    }
+    .pr-row:last-child { border:none; }
+    .pr-n { font-size:.81rem; color:var(--text-secondary); flex:1; }
+    .pr-v { font-size:.84rem; font-weight:600; color:var(--blue); white-space:nowrap; }
+    a.pr-v { cursor:pointer; transition:color .2s; }
+    a.pr-v:hover { color:var(--teal); text-decoration:underline; }
+
+    .pr-note { text-align:center; margin-top:28px; font-size:.82rem; color:var(--text-muted); }
+
+    /* ═══════════════════════════════════
+       REVIEWS
+    ═══════════════════════════════════ */
+    .rev-hdr { text-align:center; margin-bottom:12px; }
+    .rev-hdr h2 { font-size:clamp(2rem,4vw,3rem); letter-spacing:-.02em; }
+
+    .rev-meta {
+      display:flex; align-items:center; justify-content:center;
+      gap:12px; margin-bottom:52px;
+    }
+    .rev-big { font-family:var(--serif); font-size:1.45rem; font-weight:700; color:var(--text-primary); }
+    .rev-cnt { font-size:.85rem; color:var(--text-muted); }
+
+
+    .rev-marquee {
+      overflow:hidden; margin-bottom:16px;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    }
+    .rev-track { display:flex; gap:18px; width:max-content; will-change:transform; }
+    .rev-track-1 { animation:revScrollLeft 75s linear infinite; }
+    .rev-track-2 { animation:revScrollRight 85s linear infinite; }
+    .rev-marquee:hover .rev-track { animation-play-state:paused; }
+    @keyframes revScrollLeft { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+    @keyframes revScrollRight { from{transform:translateX(-50%);} to{transform:translateX(0);} }
+    @media (prefers-reduced-motion: reduce) {
+      .rev-track { animation:none !important; }
+    }
+
+    .rev-card {
+      background:var(--surface); border-radius:var(--r-lg);
+      padding:26px; box-shadow:var(--shadow-sm);
+      display:flex; flex-direction:column; gap:14px;
+      transition:all .28s var(--ease);
+    }
+    .rev-marquee .rev-card { width:340px; flex-shrink:0; }
+    .rev-card:hover { transform:translateY(-3px); box-shadow:var(--shadow-md); }
+    .rev-stars { color:#FFD166; font-size:.95rem; letter-spacing:2px; }
+    .rev-text { font-size:.88rem; color:var(--text-secondary); line-height:1.75; flex:1; }
+    .rev-author { display:flex; align-items:center; gap:10px; }
+    .rev-av {
+      width:36px; height:36px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:.78rem; font-weight:700; color:#fff; flex-shrink:0;
+    }
+    .rev-name { font-weight:600; font-size:.85rem; color:var(--text-primary); }
+    .rev-date { font-size:.72rem; color:var(--text-muted); }
+    .rev-cta { text-align:center; margin-top:36px; }
+
+    /* ═══════════════════════════════════
+       CTA BAND
+    ═══════════════════════════════════ */
+    .cta-band {
+      background:linear-gradient(130deg,var(--blue) 0%, #176659 100%);
+      padding:72px 0;
+    }
+    .cta-inner {
+      display:grid; grid-template-columns:1fr auto;
+      gap:40px; align-items:center;
+    }
+    .cta-inner h2 { font-size:clamp(1.8rem,3.5vw,2.6rem); color:#fff; letter-spacing:-.02em; margin-bottom:10px; }
+    .cta-inner p { color:rgba(255,255,255,.68); }
+    .cta-btns { display:flex; gap:12px; flex-wrap:wrap; }
+
+    /* ═══════════════════════════════════
+       CONTACTS
+    ═══════════════════════════════════ */
+    .con-grid { display:grid; grid-template-columns:1fr 1.5fr; gap:56px; align-items:stretch; }
+    .con-hdr { margin-bottom:40px; }
+    .con-hdr h2 { font-size:clamp(1.8rem,3vw,2.4rem); letter-spacing:-.02em; }
+
+    .con-list {
+      background:var(--surface); border-radius:var(--r-lg);
+      box-shadow:var(--shadow-sm); padding:30px 32px;
+    }
+    .con-item { display:flex; gap:14px; align-items:flex-start; }
+    .con-item + .con-item { margin-top:22px; padding-top:22px; border-top:1px solid var(--border); }
+    .con-ic {
+      width:42px; height:42px; border-radius:10px;
+      background:var(--teal-light); display:flex;
+      align-items:center; justify-content:center; flex-shrink:0;
+    }
+    .con-ic svg { width:20px; height:20px; color:var(--blue); }
+    .con-lbl { font-size:.7rem; text-transform:uppercase; letter-spacing:.1em; color:var(--text-muted); font-weight:600; margin-bottom:2px; }
+    .con-val { font-size:.92rem; color:var(--text-primary); font-weight:500; line-height:1.55; }
+    .con-val a { color:var(--blue); transition:color .2s; }
+    .con-val a:hover { color:var(--teal); }
+
+    .con-map-wrap { border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--shadow-md); display:flex; flex-direction:column; height:100%; }
+    .con-map { flex:1; min-height:280px; }
+    .con-map iframe { width:100%; height:100%; border:none; display:block; }
+    .con-map-link {
+      display:flex; align-items:center; justify-content:center; gap:8px;
+      background:var(--surface); padding:16px; font-size:.86rem; font-weight:600;
+      color:var(--blue); transition:background .2s, color .2s;
+    }
+    .con-map-link:hover { background:var(--teal-light); color:var(--teal); }
+    .con-map-link svg { width:16px; height:16px; }
+
+    /* ═══════════════════════════════════
+       BOOKING
+    ═══════════════════════════════════ */
+    .booking { background:var(--text-primary); padding:96px 0; }
+    .bk-inner { max-width:580px; margin:0 auto; text-align:center; }
+    .bk-inner h2 { font-size:clamp(2rem,4vw,2.8rem); color:#fff; margin-bottom:10px; letter-spacing:-.02em; }
+    .bk-sub { color:rgba(255,255,255,.58); margin-bottom:36px; }
+
+    .form { display:flex; flex-direction:column; gap:14px; text-align:left; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .fg { display:flex; flex-direction:column; gap:5px; }
+    .fl { font-size:.7rem; font-weight:600; text-transform:uppercase; letter-spacing:.09em; color:rgba(255,255,255,.45); }
+    .fi-inp {
+      background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.11);
+      border-radius:var(--r-sm); padding:13px 15px;
+      font-family:var(--sans); font-size:.88rem; color:#fff; outline:none;
+      transition:border-color .2s, background .2s;
+    }
+    .fi-inp::placeholder { color:rgba(255,255,255,.28); }
+    .fi-inp:focus { border-color:var(--teal); background:rgba(255,255,255,.1); }
+    select.fi-inp option { background:#141420; color:#fff; }
+    .bk-btn { width:100%; padding:15px; font-size:.95rem; margin-top:4px; }
+    .bk-priv { text-align:center; font-size:.72rem; color:rgba(255,255,255,.3); margin-top:6px; }
+
+    /* ═══════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════ */
+    footer { background:#0C1822; padding:48px 0 28px; }
+    .ft-grid { display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr; gap:44px; margin-bottom:36px; }
+    .ft-brand p { font-size:.82rem; color:rgba(255,255,255,.38); line-height:1.7; margin-top:10px; }
+    .ft-brand .logo-name { color:#fff; }
+    .ft-col h4 { font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:rgba(255,255,255,.3); margin-bottom:14px; }
+    .ft-links { display:flex; flex-direction:column; gap:9px; }
+    .ft-links a { font-size:.82rem; color:rgba(255,255,255,.52); transition:color .2s; }
+    .ft-links a:hover { color:var(--teal); }
+    .ft-links span { font-size:.78rem; color:rgba(255,255,255,.28); }
+    .ft-bottom {
+      border-top:1px solid rgba(255,255,255,.07); padding-top:22px;
+      display:flex; justify-content:space-between; align-items:center;
+      gap:14px; flex-wrap:wrap;
+    }
+    .ft-copy { font-size:.78rem; color:rgba(255,255,255,.28); }
+    .ft-legal { display:flex; gap:18px; }
+    .ft-legal a { font-size:.78rem; color:rgba(255,255,255,.28); transition:color .2s; }
+    .ft-legal a:hover { color:rgba(255,255,255,.55); }
+
+    /* ═══════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════ */
+    @media(max-width:1024px){
+      .doc-grid { grid-template-columns:repeat(3,1fr); }
+    }
+    @media(max-width:900px){
+      nav,.hdr-phone { display:none; }
+      .burger { display:flex; }
+      .hero-grid { grid-template-columns:1fr; gap:36px; }
+      .hero-card { order:-1; }
+      .float { display:none; }
+      .about-grid,.con-grid { grid-template-columns:1fr; }
+      .about-badge { right:0; }
+      .srv-grid { grid-template-columns:1fr; }
+      .doc-grid { grid-template-columns:repeat(2,1fr); }
+      .cta-inner { grid-template-columns:1fr; }
+      .ft-grid { grid-template-columns:1fr 1fr; }
+      .form-row { grid-template-columns:1fr; }
+    }
+    @media(max-width:600px){
+      :root{ --container:min(1180px, 100% - 32px); }
+      .section { padding:68px 0; }
+      .hero-stats { flex-wrap:wrap; gap:16px; }
+      .feats { grid-template-columns:1fr; }
+      .doc-grid { gap:12px; }
+      .ft-grid { grid-template-columns:1fr; }
+      .cta-inner { text-align:center; }
+      .cta-btns { justify-content:center; }
+      .rev-marquee .rev-card { width:268px; padding:20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- ══════════════ HEADER ══════════════ -->
+<header id="hdr">
+  <div class="container">
+    <div class="hdr">
+      <a href="#" class="logo">
+        <div class="logo-mark">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.5 2 6 4.5 6 7.5c0 1.5.4 2.8 1 3.8L8 20c.2.8 1 1 2 1h4c1 0 1.8-.2 2-1l1-8.7c.6-1 1-2.3 1-3.8C18 4.5 15.5 2 12 2z"/></svg>
+        </div>
+        <div class="logo-name">ОЛ<em>МЕД</em></div>
+      </a>
+
+      <nav>
+        <a href="#about">О клинике</a>
+        <a href="#services">Услуги</a>
+        <a href="#doctors">Врачи</a>
+        <a href="#prices">Цены</a>
+        <a href="#reviews">Отзывы</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+
+      <div class="hdr-right">
+        <a href="tel:+78124373883" class="hdr-phone">+7 (812) 437-38-83</a>
+        <a href="#booking" class="btn btn-primary">Записаться</a>
+        <div class="burger" id="burger" onclick="toggleMenu()">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="mob-nav" id="mobNav">
+  <a href="#about"    onclick="toggleMenu()">О клинике</a>
+  <a href="#services" onclick="toggleMenu()">Услуги</a>
+  <a href="#doctors"  onclick="toggleMenu()">Врачи</a>
+  <a href="#prices"   onclick="toggleMenu()">Цены</a>
+  <a href="#reviews"  onclick="toggleMenu()">Отзывы</a>
+  <a href="#contacts" onclick="toggleMenu()">Контакты</a>
+  <a href="tel:+78124373883" class="btn btn-outline" style="justify-content:center;">+7 (812) 437-38-83</a>
+  <a href="#booking" class="btn btn-primary" onclick="toggleMenu()" style="justify-content:center;">Записаться на приём</a>
+</div>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section class="hero">
+  <div class="hero-orbs" aria-hidden="true">
+    <span class="orb orb1"></span>
+    <span class="orb orb2"></span>
+    <span class="orb orb3"></span>
+  </div>
+  <div class="container">
+    <div class="hero-grid">
+
+      <!-- Left -->
+      <div>
+        <div class="hero-pill">
+          <span class="pulse"></span>
+          Стоматология · Косметология · Сестрорецк
+        </div>
+
+        <h1>Ваша семейная<br><em>стоматология</em><br>с 1991 года</h1>
+
+        <div class="hero-hook-wrap">
+          <div class="hero-hook"><span class="hero-hook-ic">🦷</span><span id="heroHookText">Лечим без боли — современная анестезия</span></div>
+        </div>
+
+        <p class="hero-sub">
+          Медицинский центр ОЛМЕД лечит и взрослых, и детей: современное оборудование, внимательные врачи и один адрес на всю семью — от первого визита ребёнка до имплантации.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#booking" class="btn btn-primary" style="font-size:1rem;padding:16px 32px;">Записаться на приём</a>
+          <a href="tel:+78124373883" class="btn btn-ghost">📞 Позвонить</a>
+        </div>
+
+        <div class="hero-stats">
+          <div>
+            <div class="stat-n"><span class="stat-num" data-target="33" data-decimals="0">0</span><sup>+</sup></div>
+            <div class="stat-l">Года<br>опыта</div>
+          </div>
+          <div>
+            <div class="stat-n"><span class="stat-num" data-target="4.8" data-decimals="1">0,0</span><sup>★</sup></div>
+            <div class="stat-l">Рейтинг<br>Яндекс</div>
+          </div>
+          <div>
+            <div class="stat-n"><span class="stat-num" data-target="10" data-decimals="0">0</span><sup>+</sup></div>
+            <div class="stat-l">Специа-<br>листов</div>
+          </div>
+          <div>
+            <div class="stat-n"><span class="stat-num" data-target="150" data-decimals="0">0</span><sup>+</sup></div>
+            <div class="stat-l">Отзывов</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: card -->
+      <div style="position:relative;" id="heroCardWrap">
+        <div class="hero-card" id="heroCard">
+          <div class="hc-badge">✓ Лицензия №ЛО 78 01-005543</div>
+
+          <div class="hc-rating">
+            <div class="hc-ring-wrap">
+              <svg viewBox="0 0 80 80">
+                <circle class="hc-ring-bg" cx="40" cy="40" r="34"/>
+                <circle class="hc-ring-fg" id="hcRingFg" cx="40" cy="40" r="34" stroke-dasharray="213.6" stroke-dashoffset="213.6"/>
+              </svg>
+              <div class="hc-ring-num">4,8</div>
+            </div>
+            <div class="hc-rating-side">
+              <div class="hc-stars">★★★★★</div>
+              <div class="hc-meta">154 оценки · Яндекс Карты</div>
+            </div>
+          </div>
+
+          <div class="hc-div"></div>
+
+          <div class="hc-grid">
+            <div class="hc-chip"><span class="hc-dot"></span>Стоматология для взрослых</div>
+            <div class="hc-chip"><span class="hc-dot"></span>Детская стоматология</div>
+            <div class="hc-chip"><span class="hc-dot"></span>Ортодонтия и брекеты</div>
+            <div class="hc-chip"><span class="hc-dot"></span>Протезирование и имплантация</div>
+            <div class="hc-chip"><span class="hc-dot"></span>Профессиональная гигиена</div>
+            <div class="hc-chip"><span class="hc-dot"></span>Косметология лица</div>
+          </div>
+
+          <div class="hc-div"></div>
+
+          <div class="hc-rev-ticker">
+            <div class="hc-rev-stars">★★★★★</div>
+            <p class="hc-rev-text" id="hcRevText">«Лечу зубы уже лет 10 у Семиной Кристины — золотые руки, спасибо огромное»</p>
+            <div class="hc-rev-name" id="hcRevName">— наталия с., отзыв на Яндекс Картах</div>
+          </div>
+
+          <div class="hc-div"></div>
+          <div class="hc-addr">📍 Сестрорецк, ул. Токарева, 9 &nbsp;·&nbsp; <span id="liveStatus">Ежедневно 10:00–20:00</span></div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ ABOUT ══════════════ -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="about-grid">
+
+      <div class="about-vis reveal">
+        <div class="about-ph">
+          <span class="ph-icon">🏥</span>
+        </div>
+        <div class="about-badge">
+          <div class="badge-n">1991</div>
+          <div class="badge-l">год основания</div>
+        </div>
+      </div>
+
+      <div class="about-text">
+        <div class="label reveal">О клинике</div>
+        <h2 class="reveal">Мы лечим зубы<br>уже <em>33 года</em></h2>
+        <p class="reveal">Медицинский центр ОЛМЕД — семейная клиника в Сестрорецке, которой доверяют несколько поколений жителей города. Оказываем полный комплекс стоматологических и косметологических услуг.</p>
+        <p class="reveal">В нашей клинике работают опытные специалисты, которые используют современные методы диагностики и лечения. Принимаем и детей, и взрослых — в атмосфере спокойствия и доверия.</p>
+
+        <div class="feats">
+          <div class="feat reveal">
+            <div class="feat-ic">🔬</div>
+            <div>
+              <strong>Микроскоп</strong>
+              <span>Точная диагностика и лечение</span>
+            </div>
+          </div>
+          <div class="feat reveal">
+            <div class="feat-ic">😌</div>
+            <div>
+              <strong>Безболезненно</strong>
+              <span>Современная анестезия</span>
+            </div>
+          </div>
+          <div class="feat reveal">
+            <div class="feat-ic">👨‍👩‍👧</div>
+            <div>
+              <strong>Семейный приём</strong>
+              <span>Взрослые и дети</span>
+            </div>
+          </div>
+          <div class="feat reveal">
+            <div class="feat-ic">📋</div>
+            <div>
+              <strong>План лечения</strong>
+              <span>Подробно до мелочей</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ SERVICES ══════════════ -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="srv-hdr">
+      <div class="label">Направления</div>
+      <h2>Что мы лечим</h2>
+    </div>
+
+    <div class="srv-grid">
+      <div class="srv-card reveal">
+        <div class="srv-ic">🦷</div>
+        <h3>Взрослая стоматология</h3>
+        <p>Полный спектр услуг — от профилактики до сложного протезирования. Используем современное оборудование и материалы.</p>
+        <ul class="srv-list">
+          <li>Консультация и диагностика</li>
+          <li>Лечение кариеса и пульпита</li>
+          <li>Протезирование зубов</li>
+          <li>Имплантация</li>
+          <li>Удаление зубов</li>
+          <li>Лечение пародонта и дёсен</li>
+          <li>Профессиональная гигиена</li>
+          <li>Отбеливание зубов</li>
+        </ul>
+        <a href="#booking" class="srv-link">Записаться →</a>
+      </div>
+
+      <div class="srv-card reveal">
+        <div class="srv-ic">🧒</div>
+        <h3>Детская стоматология</h3>
+        <p>Принимаем детей в спокойной и доброй атмосфере. Наши врачи умеют работать с самыми маленькими пациентами без стресса.</p>
+        <ul class="srv-list">
+          <li>Консультация стоматолога</li>
+          <li>Лечение молочных зубов</li>
+          <li>Лечение постоянных зубов</li>
+          <li>Пломбирование</li>
+          <li>Удаление молочных зубов</li>
+          <li>Герметизация фиссур</li>
+          <li>Ортодонтия (брекеты, трейнеры)</li>
+          <li>Профессиональное фторирование</li>
+        </ul>
+        <a href="#booking" class="srv-link">Записаться →</a>
+      </div>
+
+      <div class="srv-card reveal">
+        <div class="srv-ic">✨</div>
+        <h3>Косметология</h3>
+        <p>Современные процедуры для ухода за кожей лица от сертифицированных специалистов. Безопасно и результативно.</p>
+        <ul class="srv-list">
+          <li>Консультация косметолога</li>
+          <li>УЗ-чистка лица</li>
+          <li>Пилинги поверхностный и срединный</li>
+          <li>Мезотерапия</li>
+          <li>Биоревитализация</li>
+          <li>Контурная пластика</li>
+          <li>Ботокс / Ксеомин</li>
+          <li>Лазерная терапия ARTOS</li>
+        </ul>
+        <a href="#booking" class="srv-link">Записаться →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ DOCTORS ══════════════ -->
+<section class="section" id="doctors">
+  <div class="container">
+    <div class="doc-hdr">
+      <div class="label">Специалисты</div>
+      <h2>Наши врачи</h2>
+    </div>
+
+    <div class="doc-grid">
+      <div class="doc-card reveal">
+        <div class="doc-ph">
+          <svg class="doc-avatar" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+            <circle cx="50" cy="36" r="18"/>
+            <path d="M14 94c0-23.7 16.1-38 36-38s36 14.3 36 38"/>
+          </svg>
+        </div>
+        <div class="doc-info">
+          <div class="doc-name">Иоффе Надежда Витальевна</div>
+          <div class="doc-role">Стоматолог-терапевт</div>
+        </div>
+      </div>
+
+      <div class="doc-card reveal">
+        <div class="doc-ph">
+          <svg class="doc-avatar" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+            <circle cx="50" cy="36" r="18"/>
+            <path d="M14 94c0-23.7 16.1-38 36-38s36 14.3 36 38"/>
+          </svg>
+        </div>
+        <div class="doc-info">
+          <div class="doc-name">Семина Кристина Игоревна</div>
+          <div class="doc-role">Стоматолог-терапевт</div>
+        </div>
+      </div>
+
+      <div class="doc-card reveal">
+        <div class="doc-ph">
+          <svg class="doc-avatar" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+            <circle cx="50" cy="36" r="18"/>
+            <path d="M14 94c0-23.7 16.1-38 36-38s36 14.3 36 38"/>
+          </svg>
+        </div>
+        <div class="doc-info">
+          <div class="doc-name">Большаков Александр Сергеевич</div>
+          <div class="doc-role">Стоматолог общей практики</div>
+        </div>
+      </div>
+
+      <div class="doc-card reveal">
+        <div class="doc-ph">
+          <svg class="doc-avatar" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+            <circle cx="50" cy="36" r="18"/>
+            <path d="M14 94c0-23.7 16.1-38 36-38s36 14.3 36 38"/>
+          </svg>
+        </div>
+        <div class="doc-info">
+          <div class="doc-name">Муратова Рената Маратовна</div>
+          <div class="doc-role">Гл. врач · Стоматолог-хирург</div>
+        </div>
+      </div>
+
+      <div class="doc-card reveal">
+        <div class="doc-ph">
+          <svg class="doc-avatar" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+            <circle cx="50" cy="36" r="18"/>
+            <path d="M14 94c0-23.7 16.1-38 36-38s36 14.3 36 38"/>
+          </svg>
+        </div>
+        <div class="doc-info">
+          <div class="doc-name">Бабело Татьяна Васильевна</div>
+          <div class="doc-role">Стоматолог-хирург</div>
+        </div>
+      </div>
+
+      <div class="doc-card reveal">
+        <div class="doc-ph">
+          <svg class="doc-avatar" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+            <circle cx="50" cy="36" r="18"/>
+            <path d="M14 94c0-23.7 16.1-38 36-38s36 14.3 36 38"/>
+          </svg>
+        </div>
+        <div class="doc-info">
+          <div class="doc-name">Воронов Игорь Александрович</div>
+          <div class="doc-role">Стоматолог-ортодонт</div>
+        </div>
+      </div>
+
+      <div class="doc-card reveal">
+        <div class="doc-ph">
+          <svg class="doc-avatar" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+            <circle cx="50" cy="36" r="18"/>
+            <path d="M14 94c0-23.7 16.1-38 36-38s36 14.3 36 38"/>
+          </svg>
+        </div>
+        <div class="doc-info">
+          <div class="doc-name">Попова Юлия Олеговна</div>
+          <div class="doc-role">Стоматолог-хирург</div>
+        </div>
+      </div>
+
+      <div class="doc-card reveal">
+        <div class="doc-ph">
+          <svg class="doc-avatar" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+            <circle cx="50" cy="36" r="18"/>
+            <path d="M14 94c0-23.7 16.1-38 36-38s36 14.3 36 38"/>
+          </svg>
+        </div>
+        <div class="doc-info">
+          <div class="doc-name">Бахвалова Елена Владимировна</div>
+          <div class="doc-role">Генеральный директор</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════ PRICES ══════════════ -->
+<section class="prices" id="prices">
+  <div class="container">
+    <div class="pr-hdr">
+      <div class="label">Прозрачные цены</div>
+      <h2>Стоимость услуг</h2>
+    </div>
+
+    <div class="pr-tabs" role="tablist">
+      <button class="pr-tab active" role="tab" aria-selected="true" onclick="switchPrTab(this,'pr-p1')"><span class="pr-tab-ic">🔍</span>Терапевтическая стоматология<span class="pr-tab-count">8</span></button>
+      <button class="pr-tab" role="tab" aria-selected="false" onclick="switchPrTab(this,'pr-p2')"><span class="pr-tab-ic">💉</span>Анестезия<span class="pr-tab-count">3</span></button>
+      <button class="pr-tab" role="tab" aria-selected="false" onclick="switchPrTab(this,'pr-p3')"><span class="pr-tab-ic">✨</span>Профессиональная гигиена<span class="pr-tab-count">6</span></button>
+      <button class="pr-tab" role="tab" aria-selected="false" onclick="switchPrTab(this,'pr-p4')"><span class="pr-tab-ic">🦷</span>Лечение кариеса<span class="pr-tab-count">7</span></button>
+      <button class="pr-tab" role="tab" aria-selected="false" onclick="switchPrTab(this,'pr-p5')"><span class="pr-tab-ic">🛡️</span>Лечение гиперестезии<span class="pr-tab-count">3</span></button>
+      <button class="pr-tab" role="tab" aria-selected="false" onclick="switchPrTab(this,'pr-p6')"><span class="pr-tab-ic">💎</span>Косметология<span class="pr-tab-count">7</span></button>
+    </div>
+
+    <div class="pr-panels reveal">
+
+      <div class="pr-panel active" id="pr-p1">
+        <div class="pr-row"><span class="pr-n">Осмотр, консультация</span><span class="pr-v">500 ₽</span></div>
+        <div class="pr-row"><span class="pr-n">Консультация с планом лечения</span><span class="pr-v">1 000 ₽</span></div>
+        <div class="pr-row"><span class="pr-n">Повторный осмотр + справка о санации</span><span class="pr-v">500 ₽</span></div>
+        <div class="pr-row"><span class="pr-n">Лечение с применением микроскопа</span><span class="pr-v">от 1 000 ₽</span></div>
+        <div class="pr-row"><span class="pr-n">Рентгенография внутриротовая</span><span class="pr-v">500 ₽</span></div>
+        <div class="pr-row"><span class="pr-n">Кабинетное отбеливание</span><span class="pr-v">15 000 ₽</span></div>
+        <div class="pr-row"><span class="pr-n">Домашнее отбеливание</span><span class="pr-v">10 000 ₽</span></div>
+        <div class="pr-row"><span class="pr-n">Каппа для отбеливания</span><span class="pr-v">5 000 ₽</span></div>
+      </div>
+
+      <div class="pr-panel" id="pr-p2">
+        <div class="pr-row"><span class="pr-n">Ультракаин форте / Артикаин</span><span class="pr-v">700 ₽</span></div>
+        <div class="pr-row"><span class="pr-n">Ораблок</span><span class="pr-v">700 ₽</span></div>
+        <div class="pr-row"><span class="pr-n">Скандонест</span><span class="pr-v">700 ₽</span></div>
+      </div>
+
+      <div class="pr-panel" id="pr-p3">
+        <div class="pr-row"><span class="pr-n">Профилактическая чистка (налёт + полировка)</span><span class="pr-v">2 000 ₽</span></div>
+        <div class="pr-row"><span class="pr-n">Комплексная гигиена (УЗ + полировка)</span><span class="pr-v">3 000 ₽</span></div>
+        <div class="pr-row"><span class="pr-n">Комплексная при обильных отложениях</span><span class="pr-v">4 500 ₽</span></div>
+        <div class="pr-row"><span class="pr-n">Комплексная (1 челюсть)</span><span class="pr-v">1 500 ₽</span></div>
+        <div class="pr-row"><span class="pr-n">AirFlow (1 челюсть)</span><span class="pr-v">1 500 ₽</span></div>
+        <div class="pr-row"><span class="pr-n">Снятие отложений (1 зуб)</span><span class="pr-v">200 ₽</span></div>
+      </div>
+
+      <div class="pr-panel" id="pr-p4">
+        <div class="pr-row"><span class="pr-n">Временная пломба химическая</span><span class="pr-v">400 ₽</span></div>
+        <div class="pr-row"><span class="pr-n">Временная пломба CLIP</span><span class="pr-v">500 ₽</span></div>
+        <div class="pr-row"><span class="pr-n">Лечение кариеса (1 поверхность)</span><span class="pr-v">3 800 ₽</span></div>
+        <div class="pr-row"><span class="pr-n">Лечение кариеса (2 поверхности)</span><span class="pr-v">4 300 ₽</span></div>
+        <div class="pr-row"><span class="pr-n">Лечение кариеса (3 поверхности)</span><span class="pr-v">4 700 ₽</span></div>
+        <div class="pr-row"><span class="pr-n">Эстетическая реставрация</span><span class="pr-v">5 500 ₽</span></div>
+        <div class="pr-row"><span class="pr-n">Лечение кариеса (стеклоиономер)</span><span class="pr-v">2 500 ₽</span></div>
+      </div>
+
+      <div class="pr-panel" id="pr-p5">
+        <div class="pr-row"><span class="pr-n">Покрытие фторлаком</span><span class="pr-v">300 ₽</span></div>
+        <div class="pr-row"><span class="pr-n">Покрытие Admira Protect</span><span class="pr-v">500 ₽</span></div>
+        <div class="pr-row"><span class="pr-n">Глубокое фторирование всех зубов</span><span class="pr-v">1 500 ₽</span></div>
+      </div>
+
+      <div class="pr-panel" id="pr-p6">
+        <div class="pr-row"><span class="pr-n">Консультация косметолога</span><span class="pr-v">бесплатно</span></div>
+        <div class="pr-row"><span class="pr-n">УЗ-чистка лица</span><a href="#booking" class="pr-v">уточнить</a></div>
+        <div class="pr-row"><span class="pr-n">Пилинг поверхностный / срединный</span><a href="#booking" class="pr-v">уточнить</a></div>
+        <div class="pr-row"><span class="pr-n">Мезотерапия</span><a href="#booking" class="pr-v">уточнить</a></div>
+        <div class="pr-row"><span class="pr-n">Биоревитализация</span><a href="#booking" class="pr-v">уточнить</a></div>
+        <div class="pr-row"><span class="pr-n">Контурная пластика</span><a href="#booking" class="pr-v">уточнить</a></div>
+        <div class="pr-row"><span class="pr-n">Ботокс / Ксеомин</span><a href="#booking" class="pr-v">уточнить</a></div>
+      </div>
+
+    </div>
+    <p class="pr-note">Полный прайс-лист — по запросу или на консультации. Цены актуальны на 2026 год.</p>
+  </div>
+</section>
+
+<!-- ══════════════ REVIEWS ══════════════ -->
+<section class="section" id="reviews">
+  <div class="container">
+    <div class="rev-hdr">
+      <div class="label" style="justify-content:center;">Отзывы пациентов</div>
+      <h2>Что говорят о нас</h2>
+    </div>
+    <div class="rev-meta">
+      <div class="rev-big">4,8 ★★★★★</div>
+      <div class="rev-cnt">154 оценки · Яндекс Карты</div>
+    </div>
+
+    <div class="rev-marquee">
+      <div class="rev-track rev-track-1">
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Великолепная Надежда Витальевна Иоффе! Чудесный врач, золотые руки! Восстановила мой практически утраченный зуб — безболезненно, быстро и недорого. Всё сделано в день обращения!»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#1B5E8A,#3BADA0)">ОН</div>
+            <div>
+              <div class="rev-name">Ольга Новицкая</div>
+              <div class="rev-date">Март 2025</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Лечимся всей семьёй много лет. Врачи — золотые руки, новейшее оборудование, прекрасный коллектив, протезирование на высшем уровне!»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#8A3D1B,#CB6D45)">ЕК</div>
+            <div>
+              <div class="rev-name">Екатерина Камкина</div>
+              <div class="rev-date">Март 2024</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Обращалась на консультацию по протезированию нижней челюсти, также делала гигиеническую чистку. На ресепшене встречает доброжелательная Мария, которая всегда владеет нужной информацией.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#5B4E9B,#9D64C4)">AS</div>
+            <div>
+              <div class="rev-name">anna.silverceva</div>
+              <div class="rev-date">Октябрь 2025</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Прекрасный врач Александр Сергеевич Большаков вылечил зубы ребёнку 7 лет и супруге. Дочь сказала — вообще не больно! Полный восторг от профессионального подхода. Спасибо большое!»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#1E7F72,#3BADA0)">АВ</div>
+            <div>
+              <div class="rev-name">Алексей Васильевич</div>
+              <div class="rev-date">Декабрь 2023</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Шикарная стоматология — лечу зубы только здесь. Цены приемлемые, удобное расположение, персонал — большие молодцы!»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#2D6A3A,#4CAF73)">ВЦ</div>
+            <div>
+              <div class="rev-name">Вера Целенкова</div>
+              <div class="rev-date">Январь 2024</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Лечу зубы уже лет 10 у Семиной Кристины — спасает зубы, за которые другие не берутся. Про таких говорят: золотые руки. Спасибо огромное!»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#8A2D6B,#C45B9B)">НС</div>
+            <div>
+              <div class="rev-name">наталия с.</div>
+              <div class="rev-date">Март 2025</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Обратился в Олмед с серьёзной проблемой. Моим врачом оказалась Любовь Андреевна — отличный специалист: и зуб вылечит, и шутку расскажет. Весь персонал внимателен и вежлив.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#1A3A6B,#2D72C8)">ВШ</div>
+            <div>
+              <div class="rev-name">Виктор Ш.</div>
+              <div class="rev-date">Февраль 2019</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Отличная клиника. Приемлемые цены, очень качественное обслуживание и восхитительно безболезненное, аккуратное лечение. Удобное расположение. Всегда чисто, приятная атмосфера.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#8A6B1A,#C8A83B)">АБ</div>
+            <div>
+              <div class="rev-name">Анастасия Бондаренко</div>
+              <div class="rev-date">Январь 2022</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Сёмина Кристина Игоревна спасает зубы, за которые другие стоматологи не берутся, говорят — под удаление! Внимательный и аккуратный врач. Лечимся у неё больше 10 лет всей семьёй.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#1B5E8A,#3BADA0)">Е</div>
+            <div>
+              <div class="rev-name">Екатерина</div>
+              <div class="rev-date">Декабрь 2021</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Клиника понравилась! Профессиональные стоматологи! Современное оборудование! Лечили первый раз зуб сыну — всё прошло быстро и безболезненно!»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#8A3D1B,#CB6D45)">ТЧ</div>
+            <div>
+              <div class="rev-name">Татьяна Чаплыгина</div>
+              <div class="rev-date">Май 2022</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Очень понравился детский врач. Приятная обстановка, мультики для ребёнка, даже халат с детским рисунком. Всё подробно рассказали и подарок ребёнку дали после приёма.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#5B4E9B,#9D64C4)">X</div>
+            <div>
+              <div class="rev-name">xoxa33333</div>
+              <div class="rev-date">Август 2019</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Отличная стоматология. Чудесные врачи и вежливые администраторы. Езжу сюда из Приморского района не первый год. Очень довольна.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#1E7F72,#3BADA0)">ОМ</div>
+            <div>
+              <div class="rev-name">Оксана Медведева</div>
+              <div class="rev-date">Декабрь 2022</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Клиника отличная! Недавно поставила съёмные протезы, всё понравилось, очень довольна. Спасибо доктору Казакову.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#2D6A3A,#4CAF73)">ЮС</div>
+            <div>
+              <div class="rev-name">Юлия С.</div>
+              <div class="rev-date">Январь 2024</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Сделали всё в лучшем виде, удалял зуб мудрости — очень сложный случай. Было без боли и очень быстро зажил. Однозначно 5 звёзд.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#8A2D6B,#C45B9B)">АМ</div>
+            <div>
+              <div class="rev-name">Андрей Москвитин</div>
+              <div class="rev-date">Сентябрь 2024</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Великолепная Надежда Витальевна Иоффе! Чудесный врач, золотые руки! Восстановила мой практически утраченный зуб — безболезненно, быстро и недорого. Всё сделано в день обращения!»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#1B5E8A,#3BADA0)">ОН</div>
+            <div>
+              <div class="rev-name">Ольга Новицкая</div>
+              <div class="rev-date">Март 2025</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Лечимся всей семьёй много лет. Врачи — золотые руки, новейшее оборудование, прекрасный коллектив, протезирование на высшем уровне!»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#8A3D1B,#CB6D45)">ЕК</div>
+            <div>
+              <div class="rev-name">Екатерина Камкина</div>
+              <div class="rev-date">Март 2024</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Обращалась на консультацию по протезированию нижней челюсти, также делала гигиеническую чистку. На ресепшене встречает доброжелательная Мария, которая всегда владеет нужной информацией.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#5B4E9B,#9D64C4)">AS</div>
+            <div>
+              <div class="rev-name">anna.silverceva</div>
+              <div class="rev-date">Октябрь 2025</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Прекрасный врач Александр Сергеевич Большаков вылечил зубы ребёнку 7 лет и супруге. Дочь сказала — вообще не больно! Полный восторг от профессионального подхода. Спасибо большое!»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#1E7F72,#3BADA0)">АВ</div>
+            <div>
+              <div class="rev-name">Алексей Васильевич</div>
+              <div class="rev-date">Декабрь 2023</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Шикарная стоматология — лечу зубы только здесь. Цены приемлемые, удобное расположение, персонал — большие молодцы!»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#2D6A3A,#4CAF73)">ВЦ</div>
+            <div>
+              <div class="rev-name">Вера Целенкова</div>
+              <div class="rev-date">Январь 2024</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Лечу зубы уже лет 10 у Семиной Кристины — спасает зубы, за которые другие не берутся. Про таких говорят: золотые руки. Спасибо огромное!»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#8A2D6B,#C45B9B)">НС</div>
+            <div>
+              <div class="rev-name">наталия с.</div>
+              <div class="rev-date">Март 2025</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Обратился в Олмед с серьёзной проблемой. Моим врачом оказалась Любовь Андреевна — отличный специалист: и зуб вылечит, и шутку расскажет. Весь персонал внимателен и вежлив.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#1A3A6B,#2D72C8)">ВШ</div>
+            <div>
+              <div class="rev-name">Виктор Ш.</div>
+              <div class="rev-date">Февраль 2019</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Отличная клиника. Приемлемые цены, очень качественное обслуживание и восхитительно безболезненное, аккуратное лечение. Удобное расположение. Всегда чисто, приятная атмосфера.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#8A6B1A,#C8A83B)">АБ</div>
+            <div>
+              <div class="rev-name">Анастасия Бондаренко</div>
+              <div class="rev-date">Январь 2022</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Сёмина Кристина Игоревна спасает зубы, за которые другие стоматологи не берутся, говорят — под удаление! Внимательный и аккуратный врач. Лечимся у неё больше 10 лет всей семьёй.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#1B5E8A,#3BADA0)">Е</div>
+            <div>
+              <div class="rev-name">Екатерина</div>
+              <div class="rev-date">Декабрь 2021</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Клиника понравилась! Профессиональные стоматологи! Современное оборудование! Лечили первый раз зуб сыну — всё прошло быстро и безболезненно!»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#8A3D1B,#CB6D45)">ТЧ</div>
+            <div>
+              <div class="rev-name">Татьяна Чаплыгина</div>
+              <div class="rev-date">Май 2022</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Очень понравился детский врач. Приятная обстановка, мультики для ребёнка, даже халат с детским рисунком. Всё подробно рассказали и подарок ребёнку дали после приёма.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#5B4E9B,#9D64C4)">X</div>
+            <div>
+              <div class="rev-name">xoxa33333</div>
+              <div class="rev-date">Август 2019</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Отличная стоматология. Чудесные врачи и вежливые администраторы. Езжу сюда из Приморского района не первый год. Очень довольна.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#1E7F72,#3BADA0)">ОМ</div>
+            <div>
+              <div class="rev-name">Оксана Медведева</div>
+              <div class="rev-date">Декабрь 2022</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Клиника отличная! Недавно поставила съёмные протезы, всё понравилось, очень довольна. Спасибо доктору Казакову.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#2D6A3A,#4CAF73)">ЮС</div>
+            <div>
+              <div class="rev-name">Юлия С.</div>
+              <div class="rev-date">Январь 2024</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Сделали всё в лучшем виде, удалял зуб мудрости — очень сложный случай. Было без боли и очень быстро зажил. Однозначно 5 звёзд.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#8A2D6B,#C45B9B)">АМ</div>
+            <div>
+              <div class="rev-name">Андрей Москвитин</div>
+              <div class="rev-date">Сентябрь 2024</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="rev-marquee">
+      <div class="rev-track rev-track-2">
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Хорошая стоматология, дёргала зуб у прекрасного врача Семиной Кристины Игоревны. Советую врача, очень компетентный специалист.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#1B5E8A,#3BADA0)">ЗЛ</div>
+            <div>
+              <div class="rev-name">Зоя Логинова</div>
+              <div class="rev-date">Август 2024</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Здесь думают о людях, что сегодня большая редкость. Я нашёл то, что долго искал — профессионалы здесь высшего класса.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#8A3D1B,#CB6D45)">ГШ</div>
+            <div>
+              <div class="rev-name">Георгий Шнитко</div>
+              <div class="rev-date">Март 2025</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Молодцы. Особенно имплантолог Андрей Сергеевич. Хирург по призванию.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#5B4E9B,#9D64C4)">ЛГ</div>
+            <div>
+              <div class="rev-name">Лариса Генюш</div>
+              <div class="rev-date">Июнь 2025</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Спасибо большое стоматологу Нуржане! Вы супер врач!»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#1E7F72,#3BADA0)">НК</div>
+            <div>
+              <div class="rev-name">Наталья Кротова</div>
+              <div class="rev-date">Январь 2025</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Хочу выразить искреннюю признательность директору клиники Олмед Елене Владимировне Бахваловой за эффективную организацию работы, готовность выслушать и понимание.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#2D6A3A,#4CAF73)">НШ</div>
+            <div>
+              <div class="rev-name">Нина Шурлина</div>
+              <div class="rev-date">Апрель 2024</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Отзывчивые сотрудники, хороший коллектив, несмотря на то что врачи меняются. Знают своё дело!»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#8A2D6B,#C45B9B)">ВП</div>
+            <div>
+              <div class="rev-name">Вадим П.</div>
+              <div class="rev-date">Март 2025</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Отличный стомат-кабинет. Общение доброе и вежливое. Делают быстро и качественно — провели лечение верхней четвёрки без задержек и очень аккуратно.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#1A3A6B,#2D72C8)">АЗ</div>
+            <div>
+              <div class="rev-name">Александр Зубков</div>
+              <div class="rev-date">Февраль 2025</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Великолепная клиника, отзывчивый персонал! Сломала зуб почти пополам — врач потратила много времени и восстановила так, что от родного не отличишь. Теперь только сюда.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#8A6B1A,#C8A83B)">ЕА</div>
+            <div>
+              <div class="rev-name">Екатерина А.</div>
+              <div class="rev-date">Май 2025</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Замечательная доктор Иоффе Надежда Витальевна. Осталась довольна и отношением — сохранила зуб, с которым я уже мысленно попрощалась — и работой. Рекомендую!»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#1B5E8A,#3BADA0)">Н</div>
+            <div>
+              <div class="rev-name">Наталия</div>
+              <div class="rev-date">Апрель 2025</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Профессионалы своего дела! Рекомендую.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#8A3D1B,#CB6D45)">М</div>
+            <div>
+              <div class="rev-name">Малина</div>
+              <div class="rev-date">Декабрь 2024</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«30 лет я с этим учреждением, и в 75 пока со своими зубами — очень внимательный подход к пациентам.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#5B4E9B,#9D64C4)">ЖТ</div>
+            <div>
+              <div class="rev-name">Жиленко Татьяна</div>
+              <div class="rev-date">Декабрь 2023</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Замечательные люди и отличные специалисты! Отдельная благодарность врачу Андреевой Татьяне Владимировне! Сил вам всем, крепкого здоровья и терпения!»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#1E7F72,#3BADA0)">СН</div>
+            <div>
+              <div class="rev-name">Соловей не Я</div>
+              <div class="rev-date">Декабрь 2021</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Лучшая стоматология в Сестрорецке. Приветливый персонал. Отличные специалисты.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#2D6A3A,#4CAF73)">КС</div>
+            <div>
+              <div class="rev-name">Ксения Сестрорецк</div>
+              <div class="rev-date">Октябрь 2022</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Тут жена делала себе зубки, говорит — очень достойно. Когда женщина довольна, что ещё нужно.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#8A2D6B,#C45B9B)">СК</div>
+            <div>
+              <div class="rev-name">Сергей Колабский</div>
+              <div class="rev-date">Июнь 2022</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Хорошая стоматология, дёргала зуб у прекрасного врача Семиной Кристины Игоревны. Советую врача, очень компетентный специалист.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#1B5E8A,#3BADA0)">ЗЛ</div>
+            <div>
+              <div class="rev-name">Зоя Логинова</div>
+              <div class="rev-date">Август 2024</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Здесь думают о людях, что сегодня большая редкость. Я нашёл то, что долго искал — профессионалы здесь высшего класса.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#8A3D1B,#CB6D45)">ГШ</div>
+            <div>
+              <div class="rev-name">Георгий Шнитко</div>
+              <div class="rev-date">Март 2025</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Молодцы. Особенно имплантолог Андрей Сергеевич. Хирург по призванию.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#5B4E9B,#9D64C4)">ЛГ</div>
+            <div>
+              <div class="rev-name">Лариса Генюш</div>
+              <div class="rev-date">Июнь 2025</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Спасибо большое стоматологу Нуржане! Вы супер врач!»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#1E7F72,#3BADA0)">НК</div>
+            <div>
+              <div class="rev-name">Наталья Кротова</div>
+              <div class="rev-date">Январь 2025</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Хочу выразить искреннюю признательность директору клиники Олмед Елене Владимировне Бахваловой за эффективную организацию работы, готовность выслушать и понимание.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#2D6A3A,#4CAF73)">НШ</div>
+            <div>
+              <div class="rev-name">Нина Шурлина</div>
+              <div class="rev-date">Апрель 2024</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Отзывчивые сотрудники, хороший коллектив, несмотря на то что врачи меняются. Знают своё дело!»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#8A2D6B,#C45B9B)">ВП</div>
+            <div>
+              <div class="rev-name">Вадим П.</div>
+              <div class="rev-date">Март 2025</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Отличный стомат-кабинет. Общение доброе и вежливое. Делают быстро и качественно — провели лечение верхней четвёрки без задержек и очень аккуратно.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#1A3A6B,#2D72C8)">АЗ</div>
+            <div>
+              <div class="rev-name">Александр Зубков</div>
+              <div class="rev-date">Февраль 2025</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Великолепная клиника, отзывчивый персонал! Сломала зуб почти пополам — врач потратила много времени и восстановила так, что от родного не отличишь. Теперь только сюда.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#8A6B1A,#C8A83B)">ЕА</div>
+            <div>
+              <div class="rev-name">Екатерина А.</div>
+              <div class="rev-date">Май 2025</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Замечательная доктор Иоффе Надежда Витальевна. Осталась довольна и отношением — сохранила зуб, с которым я уже мысленно попрощалась — и работой. Рекомендую!»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#1B5E8A,#3BADA0)">Н</div>
+            <div>
+              <div class="rev-name">Наталия</div>
+              <div class="rev-date">Апрель 2025</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Профессионалы своего дела! Рекомендую.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#8A3D1B,#CB6D45)">М</div>
+            <div>
+              <div class="rev-name">Малина</div>
+              <div class="rev-date">Декабрь 2024</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«30 лет я с этим учреждением, и в 75 пока со своими зубами — очень внимательный подход к пациентам.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#5B4E9B,#9D64C4)">ЖТ</div>
+            <div>
+              <div class="rev-name">Жиленко Татьяна</div>
+              <div class="rev-date">Декабрь 2023</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Замечательные люди и отличные специалисты! Отдельная благодарность врачу Андреевой Татьяне Владимировне! Сил вам всем, крепкого здоровья и терпения!»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#1E7F72,#3BADA0)">СН</div>
+            <div>
+              <div class="rev-name">Соловей не Я</div>
+              <div class="rev-date">Декабрь 2021</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Лучшая стоматология в Сестрорецке. Приветливый персонал. Отличные специалисты.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#2D6A3A,#4CAF73)">КС</div>
+            <div>
+              <div class="rev-name">Ксения Сестрорецк</div>
+              <div class="rev-date">Октябрь 2022</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">«Тут жена делала себе зубки, говорит — очень достойно. Когда женщина довольна, что ещё нужно.»</p>
+          <div class="rev-author">
+            <div class="rev-av" style="background:linear-gradient(135deg,#8A2D6B,#C45B9B)">СК</div>
+            <div>
+              <div class="rev-name">Сергей Колабский</div>
+              <div class="rev-date">Июнь 2022</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rev-cta">
+      <a href="https://yandex.ru/maps/org/olmed/1156912976/reviews/" target="_blank" rel="noopener" class="btn btn-outline">Все отзывы на Яндексе →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ CTA BAND ══════════════ -->
+<div class="cta-band">
+  <div class="container">
+    <div class="cta-inner">
+      <div>
+        <h2>Не откладывайте визит к стоматологу</h2>
+        <p>Запишитесь онлайн или позвоните — ответим в течение нескольких минут</p>
+      </div>
+      <div class="cta-btns">
+        <a href="#booking" class="btn btn-primary" style="font-size:1rem;padding:16px 28px;">Записаться онлайн</a>
+        <a href="tel:+78124373883" class="btn btn-ghost" style="font-size:1rem;padding:16px 28px;">+7 (812) 437-38-83</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ CONTACTS ══════════════ -->
+<section class="section" id="contacts">
+  <div class="container">
+    <div class="con-hdr">
+      <div class="label">Как нас найти</div>
+      <h2>Контактная<br>информация</h2>
+    </div>
+
+    <div class="con-grid">
+
+      <div class="con-info">
+        <div class="con-list">
+          <div class="con-item">
+            <div class="con-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-7.58 7-12a7 7 0 1 0-14 0c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+            <div>
+              <div class="con-lbl">Адрес</div>
+              <div class="con-val">
+                Сестрорецк, ул. Токарева, д. 9, пом. 3Н<br>
+                <span style="font-size:.8rem;color:var(--text-muted);">ООО «ОЛМЕД», 197738, Санкт-Петербург</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="con-item">
+            <div class="con-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.5 2.5.8 3.8.9.6 0 1 .5 1 1V20c0 .6-.5 1-1 1C10.6 21 3 13.4 3 4.8c0-.5.4-1 1-1h3.1c.5 0 1 .4 1 1 .1 1.3.4 2.6.9 3.8.1.4.1.8-.2 1.1l-2.2 2.1z"/></svg></div>
+            <div>
+              <div class="con-lbl">Телефоны</div>
+              <div class="con-val">
+                <a href="tel:+78124373883">+7 (812) 437-38-83</a><br>
+                <a href="tel:+79111823883">+7 (911) 182-38-83</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="con-item">
+            <div class="con-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+            <div>
+              <div class="con-lbl">Режим работы</div>
+              <div class="con-val">Ежедневно, без выходных<br>10:00 – 20:00</div>
+            </div>
+          </div>
+
+          <div class="con-item">
+            <div class="con-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 6.5l8 6 8-6"/></svg></div>
+            <div>
+              <div class="con-lbl">Email</div>
+              <div class="con-val"><a href="mailto:olmedspb@yandex.ru">olmedspb@yandex.ru</a></div>
+            </div>
+          </div>
+
+          <div class="con-item">
+            <div class="con-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12c0 4.4-4 8-9 8-1.1 0-2.2-.2-3.1-.5L4 21l1.2-3.6C4.1 16 3.5 14.5 3.5 12.9 3.5 8.5 7 5 12 5s9 3.1 9 7z"/></svg></div>
+            <div>
+              <div class="con-lbl">ВКонтакте</div>
+              <div class="con-val"><a href="https://vk.com/olmedspb" target="_blank" rel="noopener">vk.com/olmedspb</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="con-map-wrap">
+        <div class="con-map">
+          <iframe
+            src="https://yandex.ru/map-widget/v1/?ll=29.958241%2C60.088686&z=16&pt=29.958241,60.088686,pm2rdl&lang=ru_RU"
+            allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            title="Карта — ОЛМЕД Сестрорецк">
+          </iframe>
+        </div>
+        <a href="https://yandex.com/maps/-/CPxSzQ1e" target="_blank" rel="noopener" class="con-map-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-7.58 7-12a7 7 0 1 0-14 0c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Открыть в Яндекс Картах
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ BOOKING ══════════════ -->
+<section class="booking" id="booking">
+  <div class="container">
+    <div class="bk-inner">
+      <div class="label" style="color:var(--teal);justify-content:center;">Запись на приём</div>
+      <h2>Запишитесь<br>онлайн</h2>
+      <p class="bk-sub">Оставьте заявку — мы свяжемся в течение 30 минут для подтверждения времени</p>
+
+      <form class="form" id="bookForm" onsubmit="handleBook(event)">
+        <div class="form-row">
+          <div class="fg">
+            <label class="fl">Ваше имя</label>
+            <input type="text" class="fi-inp" placeholder="Иван Иванов" required>
+          </div>
+          <div class="fg">
+            <label class="fl">Телефон</label>
+            <input type="tel" class="fi-inp" placeholder="+7 (___) ___-__-__" required>
+          </div>
+        </div>
+
+        <div class="fg">
+          <label class="fl">Услуга</label>
+          <select class="fi-inp">
+            <option value="">Выберите направление</option>
+            <option>Стоматология (взрослые)</option>
+            <option>Стоматология (дети)</option>
+            <option>Ортодонтия</option>
+            <option>Протезирование и имплантация</option>
+            <option>Профессиональная гигиена</option>
+            <option>Отбеливание зубов</option>
+            <option>Косметология</option>
+            <option>Не знаю — нужна консультация</option>
+          </select>
+        </div>
+
+        <div class="fg">
+          <label class="fl">Комментарий (необязательно)</label>
+          <textarea class="fi-inp" rows="3" placeholder="Расскажите кратко о ситуации или пожеланиях по времени..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary bk-btn">Отправить заявку →</button>
+        <p class="bk-priv">Нажимая кнопку, вы соглашаетесь с обработкой персональных данных</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  <div class="container">
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <a href="#" class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.5 2 6 4.5 6 7.5c0 1.5.4 2.8 1 3.8L8 20c.2.8 1 1 2 1h4c1 0 1.8-.2 2-1l1-8.7c.6-1 1-2.3 1-3.8C18 4.5 15.5 2 12 2z"/></svg>
+          </div>
+          <div class="logo-name" style="color:#fff;">ОЛ<em style="color:var(--teal);font-style:normal;">МЕД</em></div>
+        </a>
+        <p>Медицинский центр ОЛМЕД — семейная стоматология и косметология в Сестрорецке с 1991 года.</p>
+      </div>
+
+      <div class="ft-col">
+        <h4>Услуги</h4>
+        <div class="ft-links">
+          <a href="#services">Взрослая стоматология</a>
+          <a href="#services">Детская стоматология</a>
+          <a href="#services">Ортодонтия</a>
+          <a href="#services">Протезирование</a>
+          <a href="#services">Косметология</a>
+          <a href="#services">Гигиена</a>
+        </div>
+      </div>
+
+      <div class="ft-col">
+        <h4>Клиника</h4>
+        <div class="ft-links">
+          <a href="#about">О нас</a>
+          <a href="#doctors">Наши врачи</a>
+          <a href="#prices">Прайс-лист</a>
+          <a href="#reviews">Отзывы</a>
+          <a href="#contacts">Контакты</a>
+        </div>
+      </div>
+
+      <div class="ft-col">
+        <h4>Контакты</h4>
+        <div class="ft-links">
+          <a href="tel:+78124373883">+7 (812) 437-38-83</a>
+          <a href="tel:+79111823883">+7 (911) 182-38-83</a>
+          <a href="mailto:olmedspb@yandex.ru">olmedspb@yandex.ru</a>
+          <a href="https://vk.com/olmedspb" target="_blank" rel="noopener">ВКонтакте</a>
+          <span>Ежедневно 10:00–20:00</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ft-bottom">
+      <div class="ft-copy">© 2026 ООО «ОЛМЕД» · Лицензия №ЛО 78 01-005543 от 13.02.2019</div>
+      <div class="ft-legal">
+        <a href="#">Политика конфиденциальности</a>
+        <a href="#">Пользовательское соглашение</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════ JS ══════════════ -->
+<script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Hero rotating hook
+  const heroHooks = [
+    "Лечим без боли — современная анестезия",
+    "Принимаем всей семьёй, от 2 лет",
+    "Запись в день обращения",
+    "Бесплатная консультация косметолога"
+  ];
+  const hookEl = document.getElementById('heroHookText');
+  if (hookEl && !reduceMotion) {
+    let hookIdx = 0;
+    setInterval(() => {
+      hookEl.style.opacity = 0;
+      hookEl.style.transform = 'translateY(6px)';
+      setTimeout(() => {
+        hookIdx = (hookIdx + 1) % heroHooks.length;
+        hookEl.textContent = heroHooks[hookIdx];
+        hookEl.style.opacity = 1;
+        hookEl.style.transform = 'translateY(0)';
+      }, 320);
+    }, 3600);
+  }
+
+  // Hero stat counters
+  function animateCount(el) {
+    const target = parseFloat(el.dataset.target);
+    const decimals = parseInt(el.dataset.decimals || '0', 10);
+    if (reduceMotion) {
+      el.textContent = target.toLocaleString('ru-RU', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+      return;
+    }
+    const duration = 1400;
+    const start = performance.now();
+    function tick(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = (target * eased).toLocaleString('ru-RU', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  document.querySelectorAll('.stat-num').forEach(animateCount);
+
+  // Hero rating ring (4.8 / 5 = 96%)
+  const ringFg = document.getElementById('hcRingFg');
+  if (ringFg) {
+    const circumference = 213.6;
+    const targetOffset = circumference * (1 - 4.8 / 5);
+    if (reduceMotion) {
+      ringFg.style.strokeDashoffset = targetOffset;
+    } else {
+      requestAnimationFrame(() => { ringFg.style.strokeDashoffset = targetOffset; });
+    }
+  }
+
+  // Hero card — rotating real review snippets
+  const heroReviews = [
+    { text: '«Лечу зубы уже лет 10 у Семиной Кристины — золотые руки, спасибо огромное»', name: '— наталия с., отзыв на Яндекс Картах' },
+    { text: '«Врачи — золотые руки, новейшее оборудование, протезирование на высшем уровне!»', name: '— Екатерина Камкина, отзыв на Яндекс Картах' },
+    { text: '«Шикарная стоматология, лечу зубы только здесь, персонал — большие молодцы»', name: '— Вера Целенкова, отзыв на Яндекс Картах' },
+    { text: '«Удалял зуб мудрости — очень сложный случай. Было без боли, однозначно 5 звёзд»', name: '— Андрей Москвитин, отзыв на Яндекс Картах' },
+    { text: '«Чудесные врачи и вежливые администраторы. Очень довольна»', name: '— Оксана Медведева, отзыв на Яндекс Картах' },
+    { text: '«Здесь думают о людях — профессионалы здесь высшего класса»', name: '— Георгий Шнитко, отзыв на Яндекс Картах' },
+    { text: '«Клиника отличная! Очень довольна, спасибо доктору Казакову»', name: '— Юлия С., отзыв на Яндекс Картах' },
+    { text: '«Безболезненно, быстро и очень недорого. Спасибо!»', name: '— Ольга Новицкая, отзыв на Яндекс Картах' }
+  ];
+  const hcRevText = document.getElementById('hcRevText');
+  const hcRevName = document.getElementById('hcRevName');
+  if (hcRevText && hcRevName && !reduceMotion) {
+    let revIdx = 0;
+    setInterval(() => {
+      hcRevText.style.opacity = 0; hcRevText.style.transform = 'translateY(4px)';
+      hcRevName.style.opacity = 0;
+      setTimeout(() => {
+        revIdx = (revIdx + 1) % heroReviews.length;
+        hcRevText.textContent = heroReviews[revIdx].text;
+        hcRevName.textContent = heroReviews[revIdx].name;
+        hcRevText.style.opacity = 1; hcRevText.style.transform = 'translateY(0)';
+        hcRevName.style.opacity = 1;
+      }, 300);
+    }, 4200);
+  }
+
+  // Live "open now" status (clinic runs on Moscow time, UTC+3, no DST)
+  const liveStatusEl = document.getElementById('liveStatus');
+  if (liveStatusEl) {
+    const utcMs = Date.now() + (new Date().getTimezoneOffset() * 60000);
+    const mskHour = new Date(utcMs + 3 * 3600000).getHours();
+    const isOpen = mskHour >= 10 && mskHour < 20;
+    liveStatusEl.innerHTML = isOpen
+      ? '<span style="color:#7EE8DB;">●</span> Открыто сейчас · до 20:00'
+      : '<span style="color:#FFB199;">●</span> Сейчас закрыто · откроется в 10:00';
+  }
+
+  // Hero card tilt-on-cursor (desktop only, respects reduced motion)
+  const heroCardWrap = document.getElementById('heroCardWrap');
+  const heroCard = document.getElementById('heroCard');
+  if (heroCardWrap && heroCard && !reduceMotion && window.matchMedia('(pointer:fine)').matches) {
+    heroCardWrap.addEventListener('mousemove', (e) => {
+      const r = heroCardWrap.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      heroCard.style.transform = `perspective(900px) rotateY(${px * 7}deg) rotateX(${-py * 7}deg) translateZ(0)`;
+    });
+    heroCardWrap.addEventListener('mouseleave', () => {
+      heroCard.style.transform = 'perspective(900px) rotateY(0) rotateX(0)';
+    });
+  }
+
+  // Scroll progress + sticky header
+  const prog = document.getElementById('progress');
+  const hdr  = document.getElementById('hdr');
+
+  window.addEventListener('scroll', () => {
+    const st  = window.scrollY;
+    const dh  = document.documentElement.scrollHeight - window.innerHeight;
+    prog.style.width = (st / dh * 100) + '%';
+    hdr.classList.toggle('scrolled', st > 16);
+  }, { passive: true });
+
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobNav').classList.toggle('open');
+  }
+
+  // Price tabs
+  function switchPrTab(btn, targetId) {
+    if (btn.classList.contains('active')) return;
+    document.querySelectorAll('.pr-tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected','true');
+
+    document.querySelectorAll('.pr-panel').forEach(p => p.classList.remove('active','entering'));
+    const target = document.getElementById(targetId);
+    target.classList.add('active','entering');
+    setTimeout(() => target.classList.remove('entering'), 320);
+  }
+
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Safety net: some mobile in-app browsers (Telegram WebView etc.) can fail
+  // to fire IntersectionObserver reliably, leaving content stuck at opacity:0.
+  // Force everything visible after a short delay no matter what.
+  setTimeout(() => {
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el => el.classList.add('visible'));
+  }, 1800);
+
+  // Booking form
+  function handleBook(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.bk-btn');
+    btn.textContent = '✓ Заявка отправлена! Ждите звонка.';
+    btn.style.background = '#2D9C7E';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = 'Отправить заявку →';
+      btn.style.background = '';
+      btn.disabled = false;
+      e.target.reset();
+    }, 5000);
+  }
+
+  // Phone mask
+  document.querySelectorAll('input[type="tel"]').forEach(inp => {
+    inp.addEventListener('input', e => {
+      let v = e.target.value.replace(/\D/g, '');
+      if (v.startsWith('7') || v.startsWith('8')) v = v.slice(1);
+      let out = '+7';
+      if (v.length > 0) out += ' (' + v.slice(0,3);
+      if (v.length >= 3) out += ') ' + v.slice(3,6);
+      if (v.length >= 6) out += '-' + v.slice(6,8);
+      if (v.length >= 8) out += '-' + v.slice(8,10);
+      e.target.value = out;
+    });
+  });
+</script>
+
+</body>
+</html>
